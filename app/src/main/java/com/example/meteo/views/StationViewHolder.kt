@@ -33,14 +33,14 @@ class StationViewHolder(inflater: LayoutInflater, parent: ViewGroup)
     }
 
     fun updateWeather(
-        listW: ForecastWeatherModel
-        ){
-        cityF.text = listW.city.name
-        temperature.text = listW.list[0].main.temp.toString()
-        time.text = getDate(listW.list[0].dt.toLong())
+        listW: List
+    ){
+        cityF.text = listW.weather[0].description
+        temperature.text = listW.main.temp.toString()
+        time.text = getDate(listW.dt.toLong())
         Log.e("Holder", "city : $cityF")
         Glide.with(itemView)
-            .load(URL_ICON+listW.list[0].weather[0].icon+".png")
+            .load(URL_ICON+listW.weather[0].icon+".png")
             .into(iconF)
     }
 

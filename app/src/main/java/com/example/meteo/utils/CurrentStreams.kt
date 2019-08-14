@@ -7,13 +7,14 @@ import com.example.meteo.models.List
 import com.example.meteo.models.Weather
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class CurrentStreams {
 
     companion object{
-        fun streamFetchCurrentWeather(lat:Double?, lon:Double?,key:String,units:String):Observable<CurrentWeatherModel>{
+        fun streamFetchCurrentWeather(lat:Double?, lon:Double?,key:String,units:String): Observable<CurrentWeatherModel>? {
             val currentWeatherRequest = CurrentWeatherRequest.retrofit.create(CurrentWeatherRequest::class.java)
             return currentWeatherRequest.currentWeather(lat, lon,key,units)
                 .subscribeOn(Schedulers.io())

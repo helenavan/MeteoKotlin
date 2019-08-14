@@ -8,7 +8,7 @@ import com.example.meteo.models.CurrentWeatherModel
 import com.example.meteo.models.ForecastWeatherModel
 import com.example.meteo.models.List
 
-class ForecastRecyclerView(private val listForecasts: ArrayList<ForecastWeatherModel>):RecyclerView.Adapter<StationViewHolder>() {
+class ForecastRecyclerView(private val listForecasts: ArrayList<List>):RecyclerView.Adapter<StationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StationViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -18,7 +18,7 @@ class ForecastRecyclerView(private val listForecasts: ArrayList<ForecastWeatherM
     override fun getItemCount(): Int = listForecasts.size
 
     override fun onBindViewHolder(holder: StationViewHolder, position: Int) {
-        val current: ForecastWeatherModel = listForecasts[position]
+        val current: List = listForecasts[position]
         holder.updateWeather(current)
         Log.e("Recycler", " adress : $current")
     }

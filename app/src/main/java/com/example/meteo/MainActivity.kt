@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide
 import com.example.meteo.models.City
 import com.example.meteo.models.CurrentWeatherModel
 import com.example.meteo.models.ForecastWeatherModel
+import com.example.meteo.models.List
 import com.example.meteo.utils.CurrentStreams
 import com.example.meteo.views.ForecastRecyclerView
 import com.example.meteo.views.URL_ICON
@@ -83,20 +84,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun executeRetrofit() {
-        this.disposable = CurrentStreams.streamFetchForecasteAndWeather(latitude, longitude, apiKey, "metric")
-            .subscribeWith(object : DisposableObserver<CurrentWeatherModel>() {
-                override fun onNext(t: CurrentWeatherModel) {
-                    city.text = t.name
+        this.disposable = CurrentStreams.streamFetchListForecast(latitude, longitude, apiKey, "metric")
+            ?.subscribeWith(object : DisposableObserver<ForecastWeatherModel>() {
+                override fun onNext(t: ForecastWeatherModel) {
+                    city.text = t.city.name
                     //remove number after .
-                    val liste = arrayListOf<CurrentWeatherModel>()
-                    val num = t.main.temp
+                    val liste = t.list
+                    val num = t.list[0].main.temp
                     val decimal = DecimalFormat("#.#")
                     decimal.roundingMode = RoundingMode.CEILING
                     temperature.text = decimal.format(num).toString() + " °"
                     Glide.with(applicationContext)
-                        .load(URL_ICON + t.weather[0].icon + ".png")
+                        .load(URL_ICON + t.list[0].weather[0].icon+ ".png")
                         .into(icon_weather)
-                   // displayRecyclerView(arrayListOf(ForecastWeatherModel(city = City(name=t.name))))
+                    displayRecyclerView(liste)
                 }
 
                 override fun onComplete() {
@@ -111,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         Log.e(TAG, "recyclerView : $latitude")
     }
 
-    private fun displayRecyclerView(currentList: ArrayList<ForecastWeatherModel>) {
+    private fun displayRecyclerView(currentList: ArrayList<List>) {
         currentList.listIterator()
         recycler_view.layoutManager = LinearLayoutManager(applicationContext)
         recycler_view.adapter = ForecastRecyclerView(currentList)
