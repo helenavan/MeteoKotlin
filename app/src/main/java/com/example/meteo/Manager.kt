@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun getDate(milliSeconds:Long): String? {
-    val simpleDateFormat: SimpleDateFormat = SimpleDateFormat("EEE, d MMM HH:mm", Locale.FRANCE)
+    val simpleDateFormat: SimpleDateFormat = SimpleDateFormat("HH:mm", Locale.FRANCE)
     simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val calendar: Calendar = Calendar.getInstance()
     calendar.timeInMillis.times(milliSeconds)

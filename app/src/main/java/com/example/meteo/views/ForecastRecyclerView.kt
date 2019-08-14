@@ -20,6 +20,6 @@ class ForecastRecyclerView(private val listForecasts: ArrayList<List>):RecyclerV
     override fun onBindViewHolder(holder: StationViewHolder, position: Int) {
         val current: List = listForecasts[position]
         holder.updateWeather(current)
-        Log.e("Recycler", " adress : $current")
+        Log.e("Recycler", " adress : ${current.dt_txt}")
     }
 }

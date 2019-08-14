@@ -37,8 +37,8 @@ class StationViewHolder(inflater: LayoutInflater, parent: ViewGroup)
     ){
         cityF.text = listW.weather[0].description
         temperature.text = listW.main.temp.toString()
-        time.text = getDate(listW.dt.toLong())
-        Log.e("Holder", "city : $cityF")
+        time.text = listW.dt_txt
+        Log.e("Holder", "time  : ${listW.dt_txt}")
         Glide.with(itemView)
             .load(URL_ICON+listW.weather[0].icon+".png")
             .into(iconF)

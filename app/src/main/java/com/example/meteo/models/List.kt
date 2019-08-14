@@ -9,6 +9,6 @@ data class List(@SerializedName("dt") @Expose var dt:Int,
                 @SerializedName("clouds") @Expose var clouds:Clouds,
                 @SerializedName("wind") @Expose var wind:Wind,
                 @SerializedName("sys") @Expose var sys:Sys,
-                @SerializedName("dtTxt") @Expose var dtTxt:String,
+                @SerializedName("dt_txt") @Expose var dt_txt:String,
                 @SerializedName("weather") @Expose var weather: ArrayList<Weather>,
                 @SerializedName("rain") @Expose var rain:Rain)
